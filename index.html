@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crimson Mile — Distance Coaching</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMCAtMTAgMzI4IDIwMiI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjMwOCIgaGVpZ2h0PSIxODIiIHJ4PSI5MSIgZmlsbD0iIzFBMTIxMCIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMDgiIGhlaWdodD0iMTgyIiByeD0iOTEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlCMUIzMCIgc3Ryb2tlLXdpZHRoPSIxNCIvPgogIDxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjI2OCIgaGVpZ2h0PSIxNDIiIHJ4PSI3MSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMykiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjM0IiB5PSIzNCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxMTQiIHJ4PSI1NyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPHRleHQgeD0iMTEyIiB5PSIxMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjOUIxQjMwIiBmb250LXN0eWxlPSJpdGFsaWMiPkM8L3RleHQ+CiAgPHRleHQgeD0iMTk2IiB5PSIxMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9Ijg4IiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zdHlsZT0iaXRhbGljIj5NPC90ZXh0Pjwvc3ZnPg==">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#9B1B30;--crimson-light:#C0283F;--cr-bright:#E8455A;--cream:#FAF7F2;--dark:#1A1210;--gray:#6B6560;--light-gray:#EDE9E3;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.85rem 3.5rem;background:rgba(250,247,242,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(155,27,48,0.1);}
+.nav-brand{display:flex;align-items:center;gap:0.75rem;cursor:pointer;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:var(--crimson);letter-spacing:-0.02em;}
+.nav-logo span{color:var(--dark);}
+.nav-tabs{display:flex;gap:0.1rem;list-style:none;}
+.nav-tab{font-size:0.73rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);padding:0.4rem 0.85rem;border-radius:2px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+.nav-tab:hover{color:var(--crimson);}
+.nav-tab.active{color:var(--crimson);background:rgba(155,27,48,0.07);border-color:rgba(155,27,48,0.15);}
+.nav-cta{background:var(--crimson);color:white;padding:0.5rem 1.1rem;font-size:0.72rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px;transition:background 0.2s;font-family:'DM Sans',sans-serif;}
+.nav-cta:hover{background:var(--crimson-light);}
+/* PAGES */
+.page{display:none;}.page.active{display:block;}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:62px;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3rem 5rem 4rem;background:var(--dark);}
+.eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--cr-bright);margin-bottom:1.4rem;display:flex;align-items:center;gap:0.75rem;animation:fadeUp 0.5s ease forwards;}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--cr-bright);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.2vw,4.8rem);font-weight:900;line-height:1.02;letter-spacing:-0.03em;color:white;margin-bottom:1.4rem;animation:fadeUp 0.5s 0.08s ease forwards;opacity:0;}
+.hero-title em{font-style:italic;color:var(--crimson);}
+.hero-sub{font-size:0.97rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.62);max-width:420px;margin-bottom:2rem;animation:fadeUp 0.5s 0.16s ease forwards;opacity:0;}
+.method-pills-wrap{margin-bottom:2.2rem;animation:fadeUp 0.5s 0.22s ease forwards;opacity:0;}
+.pill-label{font-size:0.65rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.55rem;}
+.pills{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.pill{font-size:0.7rem;font-weight:500;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.65);padding:0.35rem 0.8rem;border-radius:100px;transition:all 0.2s;cursor:default;}
+.pill:hover{border-color:var(--cr-bright);color:white;background:rgba(155,27,48,0.2);}
+.hero-actions{display:flex;gap:1rem;align-items:center;animation:fadeUp 0.5s 0.28s ease forwards;opacity:0;}
+.btn-primary{background:var(--crimson);color:white;padding:0.85rem 1.8rem;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px;transition:background 0.2s,transform 0.2s;}
+.btn-primary:hover{background:var(--crimson-light);transform:translateY(-1px);}
+.btn-outline{color:white;font-size:0.82rem;font-weight:500;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:0.4rem;padding-bottom:2px;border-bottom:1px solid rgba(255,255,255,0.35);transition:color 0.2s,border-color 0.2s;font-family:'DM Sans',sans-serif;}
+.btn-outline:hover{color:var(--cr-bright);border-color:var(--cr-bright);}
+.hero-right{position:relative;overflow:hidden;}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,18,16,0.15) 0%,transparent 40%);}
+.hero-badge{position:absolute;bottom:2rem;left:2rem;background:rgba(26,18,16,0.82);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-left:3px solid var(--crimson);padding:0.9rem 1.2rem;border-radius:4px;}
+.hero-badge p{color:rgba(255,255,255,0.5);font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.25rem;}
+.hero-badge strong{color:white;font-size:0.85rem;font-weight:500;}
+/* SECTION LABELS */
+.sec-label{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.sec-label::before{content:'';display:block;width:28px;height:1px;background:var(--crimson);}
+.sec-label-dark{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--cr-bright);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.sec-label-dark::before{content:'';display:block;width:28px;height:1px;background:var(--cr-bright);}
+.sec-label-center{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:0.75rem;}
+.sec-label-center::before,.sec-label-center::after{content:'';display:block;width:28px;height:1px;background:var(--crimson);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.6vw,2.5rem);font-weight:700;line-height:1.18;letter-spacing:-0.02em;}
+.sec-title em{font-style:italic;color:var(--crimson);}
+.sec-title-white{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.6vw,2.5rem);font-weight:700;color:white;line-height:1.18;letter-spacing:-0.02em;}
+.sec-title-white em{font-style:italic;color:var(--cr-bright);}
+/* PHOTO STRIP */
+.photo-strip{height:400px;overflow:hidden;position:relative;}
+.photo-strip img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;}
+.photo-strip-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,16,0.25) 0%,transparent 35%,transparent 60%,rgba(26,18,16,0.5) 100%);}
+.photo-strip-text{position:absolute;bottom:2rem;left:4rem;font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:rgba(255,255,255,0.7);}
+/* ACCORDION */
+.accordion{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,0.05);border-radius:6px;overflow:hidden;}
+.acc-item{background:rgba(255,255,255,0.02);}
+.acc-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.6rem;cursor:pointer;background:none;border:none;text-align:left;font-family:'DM Sans',sans-serif;transition:background 0.2s;}
+.acc-trigger:hover{background:rgba(255,255,255,0.04);}
+.acc-trigger-left{display:flex;align-items:center;gap:1rem;}
+.acc-icon{width:30px;height:30px;background:var(--crimson);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;}
+.acc-name{font-size:0.92rem;font-weight:500;color:white;}
+.acc-tag{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(155,27,48,0.9);background:rgba(155,27,48,0.12);border:1px solid rgba(155,27,48,0.2);padding:0.18rem 0.55rem;border-radius:100px;margin-left:0.7rem;}
+.acc-chevron{color:rgba(255,255,255,0.3);font-size:0.75rem;transition:transform 0.3s;flex-shrink:0;}
+.acc-item.open .acc-chevron{transform:rotate(180deg);}
+.acc-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.3s ease;padding:0 1.6rem;}
+.acc-item.open .acc-body{max-height:200px;padding:0 1.6rem 1.3rem;}
+.acc-body p{font-size:0.85rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.45);}
+/* SERVICES CARDS */
+.svc-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--light-gray);border:1.5px solid var(--light-gray);border-radius:6px;overflow:hidden;}
+.svc-card{background:var(--cream);padding:2.5rem 2rem;transition:background 0.3s;}
+.svc-card:hover{background:white;}
+.svc-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--light-gray);line-height:1;margin-bottom:1rem;letter-spacing:-0.04em;transition:color 0.3s;}
+.svc-card:hover .svc-num{color:rgba(155,27,48,0.1);}
+.svc-icon{width:38px;height:38px;background:var(--crimson);border-radius:3px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:0.95rem;}
+.svc-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:0.65rem;}
+.svc-desc{font-size:0.84rem;font-weight:300;line-height:1.75;color:var(--gray);}
+.svc-price{display:inline-block;margin-top:1rem;font-size:0.78rem;font-weight:500;color:var(--crimson);letter-spacing:0.05em;padding:0.3rem 0.75rem;border:1px solid rgba(155,27,48,0.25);border-radius:100px;}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3.5rem;position:relative;}
+.steps::before{content:'';position:absolute;top:20px;left:12%;right:12%;height:1px;background:var(--light-gray);z-index:0;}
+.step{text-align:center;position:relative;z-index:1;}
+.step-dot{width:40px;height:40px;border-radius:50%;background:white;border:2px solid var(--crimson);display:flex;align-items:center;justify-content:center;margin:0 auto 1.3rem;font-family:'Playfair Display',serif;font-size:0.9rem;font-weight:700;color:var(--crimson);}
+.step-name{font-weight:500;font-size:0.88rem;color:var(--dark);margin-bottom:0.45rem;}
+.step-desc{font-size:0.8rem;font-weight:300;color:var(--gray);line-height:1.6;}
+/* CONSULT / CONTACT FORM */
+.consult-form{display:flex;flex-direction:column;gap:1rem;}
+.form-field{display:flex;flex-direction:column;gap:0.38rem;}
+.form-field label{font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);}
+.form-field input,.form-field textarea{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:3px;padding:0.75rem 0.95rem;color:white;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;outline:none;transition:border-color 0.2s;resize:none;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.28);}
+.form-field input:focus,.form-field textarea:focus{border-color:rgba(255,255,255,0.38);}
+.btn-white{background:white;color:var(--crimson);padding:0.9rem 1.8rem;font-family:'DM Sans',sans-serif;font-size:0.76rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;border-radius:2px;transition:transform 0.2s,box-shadow 0.2s;align-self:flex-start;margin-top:0.4rem;}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.form-success{display:none;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:1.4rem;text-align:center;}
+.form-success p{color:white;font-size:0.92rem;font-weight:300;line-height:1.7;}
+/* PR CARDS */
+.pr-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;}
+.pr-card{background:rgba(255,255,255,0.02);padding:2.2rem 1.8rem;}
+.pr-card-event{font-size:0.66rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:0.65rem;}
+.pr-card-time{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:white;letter-spacing:-0.03em;line-height:1;margin-bottom:0.4rem;}
+.pr-card-note{font-size:0.75rem;font-weight:300;color:rgba(255,255,255,0.35);}
+/* CRED CARDS */
+.cred-grid{display:flex;flex-direction:column;gap:0.65rem;}
+.cred-card{display:flex;align-items:center;gap:1rem;padding:0.9rem 1.1rem;background:white;border:1px solid var(--light-gray);border-left:3px solid var(--crimson);border-radius:3px;}
+.cred-dot{width:7px;height:7px;background:var(--crimson);border-radius:50%;flex-shrink:0;}
+.cred-card-text strong{display:block;font-size:0.85rem;font-weight:500;color:var(--dark);margin-bottom:0.08rem;}
+.cred-card-text span{font-size:0.74rem;color:var(--gray);}
+/* FOOTER */
+footer{background:var(--dark);padding:3.5rem 4rem 2.2rem;border-top:1px solid rgba(255,255,255,0.05);}
+.footer-top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3.5rem;margin-bottom:2.5rem;}
+.footer-brand{display:flex;flex-direction:column;gap:0.9rem;}
+.footer-logo-wrap{display:flex;align-items:center;gap:0.7rem;cursor:pointer;}
+.footer-logo-text{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;color:white;}
+.footer-logo-text span{color:var(--cr-bright);}
+.footer-tagline{font-size:0.8rem;font-weight:300;color:rgba(255,255,255,0.32);line-height:1.7;max-width:230px;}
+.footer-col-title{font-size:0.66rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.32);margin-bottom:1.1rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.footer-links button{font-size:0.82rem;color:rgba(255,255,255,0.48);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;text-align:left;padding:0;transition:color 0.2s;}
+.footer-links button:hover{color:white;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.8rem;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.18);}
+/* COACH PAGE */
+.coach-hero{padding:4.5rem 4rem 3.5rem;background:var(--dark);padding-top:calc(62px + 3.5rem);}
+.coach-hero-inner{display:flex;align-items:flex-start;gap:2.5rem;max-width:860px;}
+.coach-hero-img-wrap{flex-shrink:0;width:156px;height:156px;border-radius:50%;overflow:hidden;border:3px solid var(--crimson);margin-top:0.4rem;}
+.coach-hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.coach-page-eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--cr-bright);margin-bottom:1.1rem;display:flex;align-items:center;gap:0.75rem;}
+.coach-page-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--cr-bright);}
+.coach-page-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.5vw,3.6rem);font-weight:900;color:white;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1rem;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
+.coach-page-title em{font-style:italic;color:var(--cr-bright);}
+.coach-page-sub{font-size:0.96rem;font-weight:300;line-height:1.8;color:rgba(255,255,255,0.72);max-width:520px;}
+.coach-bio{padding:5rem 4rem;background:var(--cream);display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:start;}
+.bio-label{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--crimson);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.bio-label::before{content:'';display:block;width:28px;height:1px;background:var(--crimson);}
+.bio-title{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,2.3vw,2.2rem);font-weight:700;color:var(--dark);line-height:1.2;letter-spacing:-0.02em;margin-bottom:1.3rem;}
+.bio-title em{font-style:italic;color:var(--crimson);}
+.bio-body{font-size:0.92rem;font-weight:300;line-height:1.9;color:var(--gray);margin-bottom:1.1rem;}
+/* METHODOLOGY PAGE */
+.meth-hero{min-height:52vh;position:relative;overflow:hidden;padding-top:62px;display:flex;align-items:flex-end;}
+.meth-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;}
+.meth-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,16,0.95) 0%,rgba(26,18,16,0.6) 50%,rgba(26,18,16,0.3) 100%);}
+.meth-hero-content{position:relative;z-index:2;padding:4rem 4rem;}
+/* SERVICES PAGE */
+.services-hero{min-height:48vh;position:relative;overflow:hidden;padding-top:62px;display:flex;align-items:flex-end;}
+.services-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;}
+.services-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,16,0.96) 0%,rgba(26,18,16,0.55) 60%,rgba(26,18,16,0.25) 100%);}
+.services-hero-content{position:relative;z-index:2;padding:4rem 4rem;}
+/* CONTACT PAGE */
+.contact-page{min-height:100vh;padding-top:62px;background:var(--crimson);position:relative;overflow:hidden;}
+.contact-page::before{content:'MILE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:22rem;font-weight:900;color:rgba(255,255,255,0.04);white-space:nowrap;pointer-events:none;letter-spacing:-0.05em;}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;padding:5rem 4rem;position:relative;z-index:2;}
+.contact-eyebrow{font-size:0.68rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.75rem;}
+.contact-eyebrow::before{content:'';display:block;width:28px;height:1px;background:rgba(255,255,255,0.4);}
+.contact-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.2vw,3.4rem);font-weight:900;color:white;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.2rem;}
+.contact-sub{font-size:0.94rem;font-weight:300;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:1.8rem;}
+.contact-detail{display:flex;flex-direction:column;gap:0.9rem;margin-bottom:1.8rem;}
+.contact-item{display:flex;align-items:center;gap:0.85rem;}
+.contact-item-icon{width:34px;height:34px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;}
+.contact-item-text{font-size:0.88rem;color:rgba(255,255,255,0.7);font-weight:300;}
+.contact-item-text a{color:white;text-decoration:none;font-weight:400;}
+.contact-note{font-size:0.75rem;color:rgba(255,255,255,0.38);font-style:italic;}
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+/* MOBILE */
+@media(max-width:960px){
+  nav{padding:0.85rem 1.5rem;}.nav-tabs{display:none;}
+  .hero{grid-template-columns:1fr;}.hero-right{display:none;}
+  .hero-left{padding:4.5rem 1.5rem 3rem;}
+  .coach-bio{grid-template-columns:1fr;gap:2.5rem;}
+  .coach-hero-inner{flex-direction:column;align-items:center;text-align:center;}
+  .coach-hero{padding:calc(62px + 2.5rem) 1.5rem 2.5rem;}
+  .contact-inner{grid-template-columns:1fr;gap:2.5rem;}
+  .steps{grid-template-columns:1fr 1fr;}.steps::before{display:none;}
+  .svc-grid-3,.pr-cards{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;}
+  .meth-hero-content,.services-hero-content{padding:3rem 1.5rem;}
+  .contact-inner{padding:3rem 1.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand" onclick="showPage('home')"><svg class="nav-brand-icon" width="52" height="31" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="nav-logo">Crimson<span>Mile</span></div></div>
+  <ul class="nav-tabs">
+    <li class="nav-tab active" id="tab-home" onclick="showPage('home')">Home</li>
+    <li class="nav-tab" id="tab-methodology" onclick="showPage('methodology')">Methodology</li>
+    <li class="nav-tab" id="tab-services" onclick="showPage('services')">Services</li>
+    <li class="nav-tab" id="tab-coach" onclick="showPage('coach')">Meet the Coach</li>
+    <li class="nav-tab" id="tab-contact" onclick="showPage('contact')">Contact</li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('contact')">Free Consultation</button>
+</nav>
+
+<!-- ═══════════════════════════════ HOME ═══════════════════════════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="eyebrow">Distance Coaching</div>
+      <h1 class="hero-title">Train smarter.<br>Race <em>faster.</em><br>Run longer.</h1>
+      <p class="hero-sub">Personalized distance coaching rooted in the science of running. Built on proven methodologies used by the world's best coaches and delivered with direct, one-on-one attention.</p>
+      <div class="method-pills-wrap">
+        <div class="pill-label">Coaching frameworks</div>
+        <div class="pills">
+          <span class="pill">Jack Daniels Pacing</span><span class="pill">Norwegian Method</span><span class="pill">Polarized Training</span><span class="pill">Lydiard Periodization</span><span class="pill">80/20 Running</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Book Free Consultation</button>
+        <button class="btn-outline" onclick="showPage('services')">View Services →</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://i.imgur.com/WpTiiEw.jpeg" alt="Jay Shanahan competing at Saint Joseph's University" class="hero-img">
+      <div class="hero-overlay"></div>
+      <div class="hero-badge"><p>Competing for</p><strong>Saint Joseph's University · NCAA Division I</strong></div>
+    </div>
+  </section>
+
+  <!-- Photo strip -->
+  <div class="photo-strip">
+    <img src="https://i.imgur.com/jggmMJq.jpeg" alt="XC race">
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-text">Paul Short Invitational 2025 · Lehigh University</div>
+  </div>
+
+  <!-- How it works -->
+  <section style="padding:6rem 4rem;background:var(--cream);">
+    <div style="text-align:center;margin-bottom:0;">
+      <div class="sec-label-center">The Process</div>
+      <h2 class="sec-title" style="color:var(--dark);text-align:center;">Simple from day <em>one.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-dot">1</div><div class="step-name">Book a Free Call</div><p class="step-desc">Schedule a free 15-minute consultation. Tell me about your goals and where you are right now.</p></div>
+      <div class="step"><div class="step-dot">2</div><div class="step-name">Get Your Plan</div><p class="step-desc">Receive a fully built training plan with races planned inside, synced to your device.</p></div>
+      <div class="step"><div class="step-dot">3</div><div class="step-name">Train and Log</div><p class="step-desc">Complete workouts, log your data, and message your coach directly. Your plan adjusts as you improve.</p></div>
+      <div class="step"><div class="step-dot">4</div><div class="step-name">Race Your Best</div><p class="step-desc">Arrive at your goal race sharp, confident, and peaking at the right moment.</p></div>
+    </div>
+  </section>
+
+  <!-- Services preview -->
+  <section style="padding:6rem 4rem;background:white;">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <div class="sec-label-center">What We Offer</div>
+      <h2 class="sec-title" style="color:var(--dark);text-align:center;">Three ways to <em>work together.</em></h2>
+    </div>
+    <div class="svc-grid-3">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🎯</div>
+        <div class="svc-name">All-Inclusive</div>
+        <p class="svc-desc">Interactive training log with coach feedback on every workout, weekly Zoom calls, and direct text access to your coach.</p>
+        <span class="svc-price">$149/month</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">📊</div>
+        <div class="svc-name">Plan + Feedback</div>
+        <p class="svc-desc">Interactive shared training log — you enter results and reactions, I write feedback on every single entry.</p>
+        <span class="svc-price">$85/month</span>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">📅</div>
+        <div class="svc-name">Training Plan</div>
+        <p class="svc-desc">A fully personalized plan built around your goal race, current fitness, and weekly schedule. Every workout has a purpose and every phase is periodized.</p>
+        <span class="svc-price">$40/month</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <button class="btn-primary" onclick="showPage('services')" style="background:var(--crimson);">See Full Details</button>
+    </div>
+  </section>
+
+  <!-- Photo strip 2 -->
+  <div class="photo-strip">
+    <img src="https://i.imgur.com/0CzRmoG.jpeg" alt="SJU track practice">
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-text">Training · Saint Joseph's University</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" onclick="showPage('home')"><svg class="footer-logo-icon" width="70" height="42" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="footer-logo-text">Crimson<span>Mile</span></div></div>
+        <p class="footer-tagline">Personalized distance coaching rooted in the science of running.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('methodology')">Methodology</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('coach')">Meet the Coach</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get Started</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('contact')">Book a Free Consultation</button></li>
+          <li><button onclick="showPage('services')">View Services</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="cursor:pointer" onclick="showPage('home')"><svg class="footer-bottom-icon" width="46" height="28" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg></div>
+      <div class="footer-copy">© 2026 Crimson Mile · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d574e555c535c555c53090f0b7d5a505c5451135e5250">[email&#160;protected]</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════ METHODOLOGY ═══════════════════════════════ -->
+<div id="page-methodology" class="page">
+  <section class="meth-hero">
+    <img src="https://i.imgur.com/0CzRmoG.jpeg" alt="Track practice" class="meth-hero-img">
+    <div class="meth-hero-overlay"></div>
+    <div class="meth-hero-content">
+      <div class="sec-label-dark">The Science</div>
+      <h1 class="sec-title-white" style="font-size:clamp(2.2rem,3.8vw,4rem);max-width:700px;">Coaching built on<br><em>frameworks that work.</em></h1>
+    </div>
+  </section>
+
+  <section style="padding:6rem 4rem;background:var(--dark);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-bottom:3rem;">
+      <div>
+        <div class="sec-label-dark">Our Philosophy</div>
+        <h2 class="sec-title-white">Every workout has<br><em>a reason.</em></h2>
+      </div>
+      <p style="font-size:0.92rem;font-weight:300;line-height:1.85;color:rgba(255,255,255,0.5);padding-top:0.4rem;">Great distance coaching is not guesswork. Every plan at Crimson Mile is grounded in decades of peer-reviewed exercise science and refined through the methodologies proven at the highest levels of the sport. Your training will have a reason behind every workout — and you will always know what that reason is.</p>
+    </div>
+    <div class="accordion">
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">📐</div><span class="acc-name">Jack Daniels Pace System</span><span class="acc-tag">Pace Science</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Training paces derived from your current race performances using Dr. Jack Daniels' scientific framework. Easy, threshold, interval, and repetition paces are calibrated precisely to your fitness so every workout delivers maximum benefit at minimum risk of overtraining.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">🇳🇴</div><span class="acc-name">Norwegian Double Threshold</span><span class="acc-tag">Threshold Development</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Borrowed from the training systems behind Jakob Ingebrigtsen and Norway's world-class distance runners. High volume, lactate-controlled threshold work designed to build an enormous aerobic engine without accumulating excessive fatigue.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">📊</div><span class="acc-name">Polarized Training</span><span class="acc-tag">Volume Distribution</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Roughly 80 percent of volume at genuinely easy effort, with high-quality intensity sessions reserved for the remaining 20 percent. Research consistently shows this distribution produces better outcomes than moderate-intensity training for endurance athletes.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">📈</div><span class="acc-name">Lydiard Periodization</span><span class="acc-tag">Seasonal Planning</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Arthur Lydiard's macro-periodization model structures training in distinct phases — aerobic base, anaerobic sharpening, and peaking — ensuring you arrive at goal races at the right time having done the right work in the right order.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">🔄</div><span class="acc-name">Progressive Overload</span><span class="acc-tag">Adaptation Science</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Systematically increasing training stress over time while building in recovery weeks to allow adaptation. The result is consistent long-term improvement without the injury cycles that derail most self-coached runners.</p></div></div>
+      <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)"><div class="acc-trigger-left"><div class="acc-icon">🏁</div><span class="acc-name">Race-Specific Preparation</span><span class="acc-tag">Race Peaking</span></div><span class="acc-chevron">▼</span></button><div class="acc-body"><p>Every training block is built backward from your goal race. Tune-up races, taper protocols, and sharpening workouts are planned in advance so your body peaks at exactly the right moment.</p></div></div>
+    </div>
+  </section>
+
+  <div class="photo-strip">
+    <img src="https://i.imgur.com/YRbRB6e.jpeg" alt="A10 XC Championships">
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-text">Atlantic 10 Championships — pushing through mile 4</div>
+  </div>
+
+  <section style="padding:5rem 4rem;background:var(--cream);text-align:center;">
+    <div class="sec-label-center">Ready to Train Smarter?</div>
+    <h2 class="sec-title" style="color:var(--dark);margin-bottom:1.5rem;">Start with a free<br><em>15-minute call.</em></h2>
+    <p style="font-size:0.94rem;font-weight:300;color:var(--gray);max-width:500px;margin:0 auto 2rem;line-height:1.8;">No commitment. Just a real conversation about your goals and whether Crimson Mile is the right fit.</p>
+    <button class="btn-primary" onclick="showPage('contact')">Book Free Consultation</button>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" onclick="showPage('home')"><svg class="footer-logo-icon" width="70" height="42" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="footer-logo-text">Crimson<span>Mile</span></div></div>
+        <p class="footer-tagline">Personalized distance coaching rooted in the science of running.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('methodology')">Methodology</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('coach')">Meet the Coach</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get Started</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('contact')">Book a Free Consultation</button></li>
+          <li><button onclick="showPage('services')">View Services</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="cursor:pointer" onclick="showPage('home')"><svg class="footer-bottom-icon" width="46" height="28" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg></div>
+      <div class="footer-copy">© 2026 Crimson Mile · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afc5dcc7cec1cec7cec19b9d99efc8c2cec6c381ccc0c2">[email&#160;protected]</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════ SERVICES ═══════════════════════════════ -->
+<div id="page-services" class="page">
+  <section class="services-hero">
+    <img src="https://i.imgur.com/qNHJl0x.jpeg" alt="Racing" class="services-hero-img">
+    <div class="services-hero-overlay"></div>
+    <div class="services-hero-content">
+      <div class="sec-label-dark">Services</div>
+      <h1 class="sec-title-white" style="font-size:clamp(2.2rem,3.8vw,4rem);max-width:650px;">Three ways to<br><em>work together.</em></h1>
+    </div>
+  </section>
+
+  <section style="padding:6rem 4rem;background:white;">
+    <div style="text-align:center;margin-bottom:3.5rem;">
+      <div class="sec-label-center">Choose Your Tier</div>
+      <h2 class="sec-title" style="color:var(--dark);text-align:center;margin-bottom:1rem;">Find the right<br><em>level of support.</em></h2>
+      <p style="font-size:0.92rem;font-weight:300;color:var(--gray);max-width:520px;margin:0 auto;line-height:1.8;">Every athlete is different. Whether you just need a solid plan or want a coach fully in your corner, there is an option built for you.</p>
+    </div>
+
+    <!-- Tier 01 -->
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:0;background:var(--light-gray);border-radius:8px;overflow:hidden;margin-bottom:1.5px;">
+      <div style="background:var(--dark);padding:3rem;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cr-bright);margin-bottom:0.75rem;">Most Complete</div>
+        <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.08);line-height:1;margin-bottom:0.5rem;">01</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:white;margin-bottom:0.75rem;">All-Inclusive</div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--cr-bright);font-family:'Playfair Display',serif;">$149<span style="font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.4);font-family:'DM Sans',sans-serif;">/month</span></div>
+      </div>
+      <div style="background:var(--cream);padding:3rem;">
+        <p style="font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--gray);margin-bottom:1.5rem;">The complete coaching experience. A personalized training plan, weekly workout logging with written coach responses, weekly Zoom check-ins to review your training and upcoming races, and direct text access to your coach throughout the week. Everything you need in one package.</p>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Fully personalized training plan</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Weekly workout logging + written coach responses</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Weekly Zoom check-in calls</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Direct text communication with your coach</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Race day strategy and priority response time</div>
+        </div>
+        <button class="btn-primary" onclick="showPage('contact')" style="font-size:0.72rem;">Get Started</button>
+      </div>
+    </div>
+
+    <!-- Tier 02 -->
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:0;background:var(--light-gray);border-radius:8px;overflow:hidden;margin-bottom:1.5px;">
+      <div style="background:var(--crimson);padding:3rem;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.15);line-height:1;margin-bottom:0.5rem;">02</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:white;margin-bottom:0.75rem;">Plan + Feedback</div>
+        <div style="font-size:1.5rem;font-weight:700;color:white;font-family:'Playfair Display',serif;">$85<span style="font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.55);font-family:'DM Sans',sans-serif;">/month</span></div>
+      </div>
+      <div style="background:var(--cream);padding:3rem;">
+        <p style="font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--gray);margin-bottom:1.5rem;">Your personalized training plan delivered as an interactive shared spreadsheet. You log your results and reactions after every workout, and I review each entry and write my feedback directly back to you in the same log. A true back-and-forth between athlete and coach, built around your actual data.</p>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Fully personalized training plan</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Interactive shared training log (Excel / Google Sheets)</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> You log results and reactions after every workout</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Coach written feedback on every single entry</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Plan adjustments based on your real performance data</div>
+        </div>
+        <button class="btn-primary" onclick="showPage('contact')" style="font-size:0.72rem;">Get Started</button>
+      </div>
+    </div>
+
+    <!-- Tier 03 -->
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:0;background:var(--light-gray);border-radius:8px;overflow:hidden;">
+      <div style="background:var(--dark);padding:3rem;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:rgba(255,255,255,0.08);line-height:1;margin-bottom:0.5rem;">03</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:white;margin-bottom:0.75rem;">Training Plan</div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--cr-bright);font-family:'Playfair Display',serif;">$40<span style="font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.4);font-family:'DM Sans',sans-serif;">/month</span></div>
+      </div>
+      <div style="background:var(--cream);padding:3rem;">
+        <p style="font-size:0.95rem;font-weight:300;line-height:1.85;color:var(--gray);margin-bottom:1.5rem;">A fully personalized training plan delivered as a view-only spreadsheet. Built around your current fitness, goal race, and weekly schedule — every workout purposeful, every phase periodized. You follow the plan I build specifically for you.</p>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem;">
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Fully personalized training plan (view-only)</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Workouts structured around your goal race and fitness</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Race schedule planning built in from day one</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Periodized phases — base, sharpening, peak, taper</div>
+          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.84rem;color:var(--dark);"><span style="color:var(--crimson);font-size:0.8rem;">✓</span> Plan updated as your fitness improves</div>
+        </div>
+        <button class="btn-primary" onclick="showPage('contact')" style="font-size:0.72rem;">Get Started</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo-strip">
+    <img src="https://i.imgur.com/B7kbyuS.jpeg" alt="Start line">
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-text">The start line · every race is a new opportunity</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" onclick="showPage('home')"><svg class="footer-logo-icon" width="70" height="42" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="footer-logo-text">Crimson<span>Mile</span></div></div>
+        <p class="footer-tagline">Personalized distance coaching rooted in the science of running.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('methodology')">Methodology</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('coach')">Meet the Coach</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get Started</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('contact')">Book a Free Consultation</button></li>
+          <li><button onclick="showPage('services')">View Services</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="cursor:pointer" onclick="showPage('home')"><svg class="footer-bottom-icon" width="46" height="28" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg></div>
+      <div class="footer-copy">© 2026 Crimson Mile · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e342d363f303f363f306a6c681e39333f3732703d3133">[email&#160;protected]</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════ COACH ═══════════════════════════════ -->
+<div id="page-coach" class="page">
+  <section class="coach-hero">
+    <div class="coach-hero-inner">
+      <div class="coach-hero-img-wrap">
+        <img src="https://i.imgur.com/UG3F0cG.jpeg" alt="Jay Shanahan" class="coach-hero-img">
+      </div>
+      <div>
+        <div class="coach-page-eyebrow">Meet the Coach</div>
+        <h1 class="coach-page-title">Jay <em>Shanahan.</em></h1>
+        <p class="coach-page-sub">Former NCAA Division I distance runner at Saint Joseph's University. USATF Level 1 certified coach. Built Crimson Mile to make elite-level, science-based coaching accessible to every runner who is serious about getting better.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="coach-bio">
+    <div>
+      <div class="bio-label">Background</div>
+      <h2 class="bio-title">A runner who has<br><em>been where you want to go.</em></h2>
+      <p class="bio-body">I'm Jay Shanahan. I competed as a distance runner at Saint Joseph's University in the NCAA's Atlantic 10 Conference, where I trained under Division I coaching staff and developed the technical foundation that informs every plan I write today.</p>
+      <p class="bio-body">I've spent years studying the science behind the world's most effective training systems, from Jack Daniels' VDOT methodology to the Norwegian double threshold approach that has produced some of the greatest distance runners of this generation. I built Crimson Mile to bring that level of thinking to athletes who don't have access to a college coaching staff.</p>
+      <p class="bio-body">I work with a small number of athletes at a time to make sure every athlete gets real, individualized attention. Not a template. Not a generic plan. Coaching that actually responds to how you are feeling and what your data is showing.</p>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-card"><div class="cred-dot"></div><div class="cred-card-text"><strong>Saint Joseph's University</strong><span>NCAA Division I Distance Runner · Atlantic 10 Conference</span></div></div>
+      <div class="cred-card"><div class="cred-dot"></div><div class="cred-card-text"><strong>USATF Level 1 Certified Coach</strong><span>USA Track &amp; Field Coaching Certification</span></div></div>
+      <div class="cred-card"><div class="cred-dot"></div><div class="cred-card-text"><strong>College Recruiting Experience</strong><span>1.5+ Years with NCSA · Athlete Development &amp; Placement</span></div></div>
+    </div>
+  </section>
+
+  <section style="padding:5rem 4rem;background:var(--dark);">
+    <div class="sec-label-dark">Personal Records</div>
+    <h2 class="sec-title-white" style="margin-bottom:2.5rem;">Times set at the<br><em>Division I level.</em></h2>
+    <div class="pr-cards">
+      <div class="pr-card"><div class="pr-card-event">3,000 Meters</div><div class="pr-card-time">8:28</div><div class="pr-card-note">Saint Joseph's University</div></div>
+      <div class="pr-card"><div class="pr-card-event">5,000 Meters</div><div class="pr-card-time">14:33</div><div class="pr-card-note">Saint Joseph's University</div></div>
+      <div class="pr-card"><div class="pr-card-event">8K Cross Country</div><div class="pr-card-time">24:19</div><div class="pr-card-note">Saint Joseph's University</div></div>
+    </div>
+  </section>
+
+  <div class="photo-strip">
+    <img src="https://i.imgur.com/YRbRB6e.jpeg" alt="XC race">
+    <div class="photo-strip-overlay"></div>
+    <div class="photo-strip-text">Pushing through the final stretch</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" onclick="showPage('home')"><svg class="footer-logo-icon" width="70" height="42" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="footer-logo-text">Crimson<span>Mile</span></div></div>
+        <p class="footer-tagline">Personalized distance coaching rooted in the science of running.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('methodology')">Methodology</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('coach')">Meet the Coach</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get Started</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('contact')">Book a Free Consultation</button></li>
+          <li><button onclick="showPage('services')">View Services</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="cursor:pointer" onclick="showPage('home')"><svg class="footer-bottom-icon" width="46" height="28" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg></div>
+      <div class="footer-copy">© 2026 Crimson Mile · Philadelphia, PA</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════ CONTACT ═══════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-page">
+    <div class="contact-inner">
+      <div>
+        <div class="contact-eyebrow">Get in Touch</div>
+        <h1 class="contact-title">Book your free<br>15-minute call.</h1>
+        <p class="contact-sub">Not sure if coaching is right for you? Start with a free 15-minute call. No commitment, no pressure — just a real conversation about your goals and how Crimson Mile can help you get there.</p>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <div class="contact-item-icon" style="font-size:1rem;">📸</div>
+            <div class="contact-item-text"><a href="https://www.instagram.com/crimsonmile" target="_blank">@crimsonmile on Instagram</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" style="font-size:1rem;">🧵</div>
+            <div class="contact-item-text"><a href="https://www.threads.com/@crimsonmile" target="_blank">@crimsonmile on Threads</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" style="font-size:1rem;">🎵</div>
+            <div class="contact-item-text"><a href="https://www.tiktok.com/@crimsonmile" target="_blank">@crimsonmile on TikTok</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon" style="font-size:1rem;">▶️</div>
+            <div class="contact-item-text"><a href="https://www.youtube.com/@crimsonmilecoaching" target="_blank">@crimsonmilecoaching on YouTube</a></div>
+          </div>
+        </div>
+        <p class="contact-note">Responses within one business day. All inquiries are confidential.</p>
+      </div>
+      <div>
+        <form class="consult-form" id="consultForm" action="https://formspree.io/f/xpqoyyeb" method="POST" onsubmit="submitForm(event)">
+          <input type="hidden" name="_subject" value="New Consultation Request — Crimson Mile">
+          <div class="form-field"><label>First Name</label><input type="text" name="first_name" placeholder="Jane" required></div>
+          <div class="form-field"><label>Email Address</label><input type="email" name="email" placeholder="jane@email.com" required></div>
+          <div class="form-field"><label>Phone Number</label><input type="tel" name="phone" placeholder="(555) 000-0000"></div>
+          <div class="form-field"><label>Which service are you interested in?</label>
+            <select name="service_interest" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:3px;padding:0.75rem 0.95rem;color:white;font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;outline:none;">
+              <option value="" style="background:#1A1210;">Select a tier...</option>
+              <option value="All-Inclusive ($149/mo)" style="background:#1A1210;">All-Inclusive — $149/month</option>
+              <option value="Plan + Feedback ($85/mo)" style="background:#1A1210;">Plan + Feedback — $85/month</option>
+              <option value="Training Plan ($40/mo)" style="background:#1A1210;">Training Plan — $40/month</option>
+              <option value="Not sure yet" style="background:#1A1210;">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-field"><label>Goals and Background</label><textarea rows="5" name="goals_and_background" placeholder="Tell me about your running background, current training, and what you're working toward..." required></textarea></div>
+          <button type="submit" class="btn-white">Request My Free Consultation</button>
+        </form>
+        <div class="form-success" id="formSuccess"><p><strong>Thanks for reaching out!</strong><br>I'll be in touch within one business day to schedule your free 15-minute call.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-wrap" onclick="showPage('home')"><svg class="footer-logo-icon" width="70" height="42" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg><div class="footer-logo-text">Crimson<span>Mile</span></div></div>
+        <p class="footer-tagline">Personalized distance coaching rooted in the science of running.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('home')">Home</button></li>
+          <li><button onclick="showPage('methodology')">Methodology</button></li>
+          <li><button onclick="showPage('services')">Services</button></li>
+          <li><button onclick="showPage('coach')">Meet the Coach</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get Started</div>
+        <ul class="footer-links">
+          <li><button onclick="showPage('contact')">Book a Free Consultation</button></li>
+          <li><button onclick="showPage('services')">View Services</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div style="cursor:pointer" onclick="showPage('home')"><svg class="footer-bottom-icon" width="46" height="28" viewBox="-10 -10 328 202" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="308" height="182" rx="91" fill="#1A1210"/>
+  <rect x="0" y="0" width="308" height="182" rx="91" fill="none" stroke="#9B1B30" stroke-width="14"/>
+  <rect x="20" y="20" width="268" height="142" rx="71" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+  <rect x="34" y="34" width="240" height="114" rx="57" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <text x="112" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="#9B1B30" font-style="italic">C</text>
+  <text x="196" y="122" text-anchor="middle" font-family="Georgia,serif" font-size="88" font-weight="900" fill="white" font-style="italic">M</text></svg></div>
+      <div class="footer-copy">© 2026 Crimson Mile · Philadelphia, PA</div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  function showPage(name){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+name).classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+    const t = document.getElementById('tab-'+name);
+    if(t) t.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function toggleAcc(trigger){
+    const item=trigger.closest('.acc-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.acc-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  }
+  async function submitForm(e){
+    e.preventDefault();
+    const form=document.getElementById('consultForm');
+    const success=document.getElementById('formSuccess');
+    const btn=form.querySelector('button[type="submit"]');
+    btn.textContent='Sending...';btn.disabled=true;
+    try{
+      const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
+      if(response.ok){form.style.display='none';success.style.display='block';}
+      else{btn.textContent='Something went wrong — try again';btn.disabled=false;}
+    }catch(err){btn.textContent='Something went wrong — try again';btn.disabled=false;}
+  }
+</script>
+</body>
+</html>
